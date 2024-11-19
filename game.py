@@ -17,12 +17,16 @@ results = {
     "tie": "It's a tie.",
 }
 
+
 class Game:
     def __init__(self, num_decks=1):
         """
         Initialize the Game with a specified number of decks.
         :param num_decks: Number of decks used at the table.
         """
+        self.num_decks = num_decks
+        self.table = Blackjack()
+        self.house_hand = 0
 
     def _update_count(self, card):
         """
@@ -42,13 +46,14 @@ class Game:
         :return: A string with advice.
         """
 
-
     def deal(self, player):
         """
         Deal two cards to a player and the house, and update the card count.
         Also prints advice based on the card count.
         :param player: The player's identifier.
         """
+        cards = self.table.deal(player)
+        self.house_hand = cards
 
     def hit(self, player):
         """
@@ -56,6 +61,7 @@ class Game:
         Also prints advice based on the card count.
         :param player: The player's identifier.
         """
+        self.table.hit(player)
 
     def split(self, player):
         """Perform a split for the player."""
